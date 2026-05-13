@@ -67,11 +67,10 @@
             align-items: center;
             gap: 10px;
         }
-        
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            background: linear-gradient(135deg, #334EAC, #334EAC);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -85,7 +84,7 @@
         
         .logo h1 {
             font-size: 28px;
-            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            background: linear-gradient(135deg, #334EAC, #334EAC);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -110,7 +109,7 @@
         }
         
         .nav a.active {
-            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            background: linear-gradient(135deg, #334EAC, #334EAC);
             color: white;
         }
         
@@ -121,7 +120,7 @@
         
         /* Banner Promo */
         .banner {
-            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            background: linear-gradient(135deg, #334EAC, #334EAC);
             border-radius: 24px;
             padding: 40px;
             margin-bottom: 40px;
@@ -155,7 +154,7 @@
         }
         
         .section-header a {
-            color: #8b5cf6;
+            color: #334EAC;
             text-decoration: none;
             font-weight: 600;
         }
@@ -208,7 +207,7 @@
         
         .category {
             background: #f3e8ff;
-            color: #7c3aed;
+            color: #334EAC;
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 12px;
@@ -226,7 +225,7 @@
         
         .event-info i {
             width: 16px;
-            color: #8b5cf6;
+            color: #334EAC;
         }
         
         .event-footer {
@@ -241,11 +240,11 @@
         .price {
             font-size: 20px;
             font-weight: 700;
-            color: #7c3aed;
+            color: #334EAC;
         }
         
         .btn-beli {
-            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            background: linear-gradient(135deg, #334EAC, #334EAC);
             color: white;
             border: none;
             padding: 10px 24px;
@@ -277,7 +276,7 @@
         }
         
         .scroll-container::-webkit-scrollbar-thumb {
-            background: #c4b5fd;
+            background: #96a4d7;
             border-radius: 10px;
         }
         
@@ -306,7 +305,7 @@
         }
         
         .popular-card .popular-price {
-            color: #7c3aed;
+            color: #334EAC;
             font-weight: 700;
             font-size: 14px;
             margin-top: 8px;
@@ -367,7 +366,8 @@
         <div class="header">
             <div class="logo">
                 <div class="logo-icon">
-                    <i class="fas fa-ticket-alt"></i>
+                    <img src="{{ asset('assets/ketixlogo.png') }}" alt= "Logo Ketix" 
+                    style="widht: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
                 </div>
                 <h1>Ketix</h1>
             </div>
@@ -376,6 +376,22 @@
                 <a href="{{ route('jelajah') }}" class="{{ request()->routeIs('jelajah') ? 'active' : '' }}">Jelajah</a>
                 <a href="#">Tiket-ku</a>
             </div>
+             <div class="flex gap-3">
+        @auth
+            <span class="text-sm text-gray-600">Halo, {{ Auth::user()->name }}</span>
+            @if(Auth::user()->role == 'admin')
+                <a href="{{ route('admin.dashboard') }}" class="text-purple-600">Admin</a>
+            @endif
+            <form action="{{ route('logout') }}" method="POST" class="inline">
+                @csrf
+                <button type="submit" class="text-red-600">Logout</button>
+            </form>
+        @else
+            <a href="{{ route('login') }}" class="text-purple-600">Login</a>
+            <a href="{{ route('register') }}" class="text-gray-600">Daftar</a>
+        @endauth
+    </div>
+</div>
             <div>
                 <i class="fas fa-search" style="color: #9ca3af; font-size: 20px; cursor: pointer;"></i>
             </div>

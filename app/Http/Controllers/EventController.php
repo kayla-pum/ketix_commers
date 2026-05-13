@@ -8,13 +8,13 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::all();
+        $events = Event::latest()->take(4)->get();
         return view('beranda', compact('events'));
     }
     
     public function explore()
     {
         $events = Event::latest()->get();
-        return view('beranda', compact('events'));
+        return view('jelajah', compact('events'));
     }
 }
