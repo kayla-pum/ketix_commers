@@ -469,7 +469,25 @@
             });
         });
         
-
+        // Tombol beli handler
+        document.querySelectorAll('.btn-beli').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                alert('✨ Tiket ditambahkan! ✨');
+            });
+        });
+        
+        // Navbar active
+        document.querySelectorAll('.nav a').forEach(link => {
+            if(link.getAttribute('href') !== '#') {
+                link.addEventListener('click', function(e) {
+                    if(this.getAttribute('href') === '#') {
+                        e.preventDefault();
+                        alert('Fitur sedang dalam pengembangan');
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>
