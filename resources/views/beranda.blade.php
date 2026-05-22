@@ -4,14 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ketix - Platform Tiket Event</title>
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
@@ -27,7 +22,7 @@
             color: #1f2937;
         }
         
-        /* Card hover effects */
+        
         .card-hover {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -43,14 +38,14 @@
             color: transparent;
         }
         
-        /* Container desktop */
+        
         .container-custom {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
         
-        /* Header */
+        
         .header {
             background: white;
             border-radius: 20px;
@@ -90,7 +85,7 @@
             background-clip: text;
         }
         
-        /* Navigasi */
+        
         .nav {
             display: flex;
             gap: 30px;
@@ -118,7 +113,6 @@
             color: #4b5563;
         }
         
-        /* Banner Promo */
         .banner {
             background: linear-gradient(135deg, #334EAC, #334EAC);
             border-radius: 24px;
@@ -140,7 +134,6 @@
             opacity: 0.8;
         }
         
-        /* Section Header */
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -159,7 +152,6 @@
             font-weight: 600;
         }
         
-        /* Grid Event */
         .event-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -167,7 +159,6 @@
             margin-bottom: 40px;
         }
         
-        /* Card Event */
         .event-card {
             background: white;
             border-radius: 20px;
@@ -258,7 +249,6 @@
             transform: scale(0.98);
         }
         
-        /* Horizontal Scroll untuk Populer */
         .scroll-container {
             overflow-x: auto;
             display: flex;
@@ -311,7 +301,6 @@
             margin-top: 8px;
         }
         
-        /* Event dari database (Laris Manis) */
         .event-db-section {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             border-radius: 24px;
@@ -320,7 +309,6 @@
             color: white;
         }
         
-        /* Footer */
         .footer {
             background: white;
             border-radius: 20px;
@@ -362,7 +350,7 @@
 </head>
 <body>
     <div class="container-custom">
-        <!-- Header -->
+        
         <div class="header">
             <div class="logo">
                 <div class="logo-icon">
@@ -397,7 +385,6 @@
             </div>
         </div>
         
-        <!-- Banner Promo -->
         <div class="banner">
             <div>
                 <p>✨ Flash Sale</p>
@@ -407,169 +394,42 @@
             <i class="fas fa-tags"></i>
         </div>
         
-        <!-- Rekomendasi Section -->
         <div class="section-header">
             <h2>🔥 Rekomendasi</h2>
             <a href="#">Lihat semua <i class="fas fa-arrow-right"></i></a>
         </div>
         
-        <!-- Grid Event (Static) -->
         <div class="event-grid">
-            <!-- Card 1: Peanuts Fest -->
+            @forelse($events as $event)
             <div class="event-card">
-                <img src="https://picsum.photos/id/104/400/300" alt="Peanuts Fest" class="event-image">
+                <img src="{{ $event->image ? asset($event->image) : 'https://picsum.photos/seed/'.$event->id.'/400/300' }}" alt="{{ $event->name }}" class="event-image">
                 <div class="event-content">
                     <div class="event-header">
-                        <h3>Peanuts Fest</h3>
-                        <span class="category">Festival</span>
+                        <h3>{{ $event->name }}</h3>
+                        <span class="category">{{ $event->category ?? 'Event' }}</span>
                     </div>
                     <div class="event-info">
                         <i class="far fa-calendar-alt"></i>
-                        <span>25 April 2029</span>
+                        <span>{{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</span>
                     </div>
                     <div class="event-info">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>Jakarta Convention Center</span>
+                        <span>{{ $event->location }}</span>
                     </div>
                     <div class="event-footer">
-                        <span class="price">Rp 320.000</span>
+                        <span class="price">Rp {{ number_format($event->price, 0, ',', '.') }}</span>
                         <button class="btn-beli"><i class="fas fa-ticket-alt"></i> Beli</button>
                     </div>
                 </div>
             </div>
-            
-            <!-- Card 2: Jazz Night -->
-            <div class="event-card">
-                <img src="https://picsum.photos/id/107/400/300" alt="Jazz Night" class="event-image">
-                <div class="event-content">
-                    <div class="event-header">
-                        <h3>Jazz Night Vibes</h3>
-                        <span class="category">Konser</span>
-                    </div>
-                    <div class="event-info">
-                        <i class="far fa-calendar-alt"></i>
-                        <span>10 Mei 2029</span>
-                    </div>
-                    <div class="event-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Taman Ismail Marzuki</span>
-                    </div>
-                    <div class="event-footer">
-                        <span class="price">Rp 450.000</span>
-                        <button class="btn-beli"><i class="fas fa-ticket-alt"></i> Beli</button>
-                    </div>
-                </div>
+            @empty
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px 0; color: #6b7280;">
+                <i class="fas fa-calendar-times" style="font-size: 48px; margin-bottom: 16px; color: #d1d5db;"></i>
+                <p>Belum ada event yang tersedia saat ini.</p>
             </div>
-            
-            <!-- Card 3: Comedy Show -->
-            <div class="event-card">
-                <img src="https://picsum.photos/id/20/400/300" alt="Comedy Show" class="event-image">
-                <div class="event-content">
-                    <div class="event-header">
-                        <h3>Comedy Showdown</h3>
-                        <span class="category">Komedi</span>
-                    </div>
-                    <div class="event-info">
-                        <i class="far fa-calendar-alt"></i>
-                        <span>3 Juni 2029</span>
-                    </div>
-                    <div class="event-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Teater Jakarta</span>
-                    </div>
-                    <div class="event-footer">
-                        <span class="price">Rp 200.000</span>
-                        <button class="btn-beli"><i class="fas fa-ticket-alt"></i> Beli</button>
-                    </div>
-                </div>
-            </div>
+            @endforelse
         </div>
         
-        <!-- SECTION LARIS MANIS (Dari Database) -->
-        <div class="event-db-section">
-            <div class="text-center mb-12">
-                <h1 class="text-4xl md:text-6xl font-black mb-4">
-                    LARIS <span class="gradient-text">MANIS</span>
-                </h1>
-                <p class="text-lg md:text-xl text-gray-300">
-                    Kumpulan event-event laris manis di Ketix yang mungkin kamu sukai
-                </p>
-            </div>
-
-            <!-- Events Grid dari Database -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @forelse($events as $event)
-                <div class="card-hover bg-white/10 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/20">
-                    <!-- Event Image -->
-                    @if($event->image_url)
-                    <div class="h-48 overflow-hidden">
-                        <img src="{{ $event->image_url }}" alt="{{ $event->title }}" class="w-full h-full object-cover hover:scale-110 transition duration-500">
-                    </div>
-                    @else
-                    <div class="h-48 bg-gradient-to-br from-amber-500/30 to-pink-500/30 flex items-center justify-center">
-                        <span class="text-5xl">🎪</span>
-                    </div>
-                    @endif
-
-                    <div class="p-5">
-                        <!-- Title -->
-                        <h3 class="text-xl font-bold mb-2">{{ $event->title }}</h3>
-                        
-                        <!-- Subtitle -->
-                        @if($event->subtitle)
-                        <p class="text-amber-400 font-semibold mb-3 text-sm">{{ $event->subtitle }}</p>
-                        @endif
-                        
-                        <!-- Performers -->
-                        @if($event->performers)
-                        <div class="mb-4">
-                            <div class="flex flex-wrap gap-2">
-                                @foreach(json_decode($event->performers) ?? [] as $performer)
-                                <span class="text-xs bg-white/20 px-2 py-1 rounded-full">{{ $performer }}</span>
-                                @endforeach
-                            </div>
-                        </div>
-                        @endif
-
-                        <!-- Date & Location -->
-                        <div class="space-y-2 text-gray-300 text-sm mb-4">
-                            <div class="flex items-center gap-2">
-                                <i class="far fa-calendar-alt"></i>
-                                <span>{{ \Carbon\Carbon::parse($event->event_date)->format('d F Y') }}</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>{{ $event->location }}</span>
-                            </div>
-                        </div>
-
-                        <!-- Status Badge -->
-                        @if($event->status == 'upcoming')
-                        <div class="inline-block px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-semibold">
-                            <i class="fas fa-clock"></i> Upcoming
-                        </div>
-                        @elseif($event->status == 'ongoing')
-                        <div class="inline-block px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-xs font-semibold">
-                            <i class="fas fa-play"></i> Ongoing
-                        </div>
-                        @else
-                        <div class="inline-block px-3 py-1 bg-gray-500/20 text-gray-400 rounded-full text-xs font-semibold">
-                            <i class="fas fa-check-circle"></i> Completed
-                        </div>
-                        @endif
-                    </div>
-                </div>
-                @empty
-                <div class="col-span-3 text-center py-12">
-                    <i class="fas fa-calendar-times text-5xl text-gray-400 mb-4"></i>
-                    <p class="text-gray-400">Belum ada event tersedia</p>
-                    <p class="text-gray-500 text-sm">Silahkan tambahkan event melalui database</p>
-                </div>
-                @endforelse
-            </div>
-        </div>
-        
-        <!-- Populer Section -->
         <div class="section-header">
             <h2>⭐ Populer Minggu Ini</h2>
             <a href="#">Lihat semua <i class="fas fa-arrow-right"></i></a>
@@ -610,14 +470,13 @@
             </div>
         </div>
         
-        <!-- Footer -->
         <div class="footer">
             <p>&copy; 2029 Ketix. Temukan event terbaik untukmu!</p>
         </div>
     </div>
     
     <script>
-        // Event card click handler
+    
         document.querySelectorAll('.event-card').forEach(card => {
             card.addEventListener('click', function(e) {
                 if(e.target.closest('.btn-beli')) return;
@@ -626,7 +485,7 @@
             });
         });
         
-        // Tombol beli handler
+    
         document.querySelectorAll('.btn-beli').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -634,7 +493,7 @@
             });
         });
         
-        // Navbar active
+        
         document.querySelectorAll('.nav a').forEach(link => {
             if(link.getAttribute('href') !== '#') {
                 link.addEventListener('click', function(e) {
