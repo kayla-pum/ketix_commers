@@ -3,27 +3,27 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\User;  // ← Tambahkan ini! Import model User
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class AdminUserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Cek dan buat admin{
+        // Buat admin
+        if(!User::where('email', 'admin@ketix.com')->exists()) {
             User::create([
                 'name' => 'Administrator',
                 'email' => 'admin@ketix.com',
                 'password' => Hash::make('admin123'),
                 'role' => 'admin'
             ]);
-            echo "Admin baru berhasil dibuat!\n";
-            //verifikasi
-            $admin = User::where('email', 'admin@ketix.com')->first();
-            echo "Role: ". $admin->role . "\n";
-            exit;
+            $this->command->info('Admin user created successfully!');
+        } else {
+            $this->command->info('Admin user already exists!');
+        }
         
-        // Cek dan buat user biasa
+        // Buat user biasa
         if(!User::where('email', 'user@ketix.com')->exists()) {
             User::create([
                 'name' => 'User Biasa',

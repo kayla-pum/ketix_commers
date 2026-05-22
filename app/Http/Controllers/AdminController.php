@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
+    //public function __construct()
+    //{
+    //    $this->middleware('admin');
+    //}
     
     public function dashboard()
     {
@@ -57,7 +57,7 @@ class AdminController extends Controller
     public function edit($id)
     {
         $event = Event::findOrFail($id);
-        return view('admin.events-edit', compact('event'));
+        return view('admin.event-edit', compact('event'));
     }
     
     public function update(Request $request, $id)
