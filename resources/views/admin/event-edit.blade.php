@@ -78,6 +78,17 @@
                             </select>
                         </div>
                         
+                        <div class="mb-4 flex gap-6">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="is_recommended" value="1" {{ $event->is_recommended ? 'checked' : '' }} class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                <span class="text-gray-700 font-medium">Jadikan Rekomendasi</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="is_popular" value="1" {{ $event->is_popular ? 'checked' : '' }} class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                <span class="text-gray-700 font-medium">Jadikan Populer</span>
+                            </label>
+                        </div>
+                        
                         <div class="mb-6">
                             <label class="block text-gray-700 font-medium mb-2">Gambar Event</label>
                             @if($event->image)

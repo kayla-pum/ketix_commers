@@ -41,6 +41,8 @@ class AdminController extends Controller
         $event->price = $request->price;
         $event->location = $request->location;
         $event->category = $request->category;
+        $event->is_recommended = $request->has('is_recommended');
+        $event->is_popular = $request->has('is_popular');
         
         if($request->hasFile('image')) {
             $image = $request->file('image');
@@ -78,6 +80,8 @@ class AdminController extends Controller
         $event->price = $request->price;
         $event->location = $request->location;
         $event->category = $request->category;
+        $event->is_recommended = $request->has('is_recommended');
+        $event->is_popular = $request->has('is_popular');
         
         if($request->hasFile('image')) {
             if($event->image && file_exists(public_path($event->image))) {

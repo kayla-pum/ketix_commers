@@ -15,6 +15,8 @@ class Event extends Model
         'price',
         'location',
         'image',
-        'category'
+        'category',
+        'is_recommended',
+        'is_popular'
     ];
 }

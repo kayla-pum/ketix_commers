@@ -79,6 +79,17 @@
                             </select>
                         </div>
                         
+                        <div class="mb-6 flex gap-6">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="is_recommended" value="1" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                <span class="text-gray-700 font-medium">Jadikan Rekomendasi</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="is_popular" value="1" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                <span class="text-gray-700 font-medium">Jadikan Populer</span>
+                            </label>
+                        </div>
+                        
                         <div class="mb-6">
                             <label class="block text-gray-700 font-medium mb-2">Gambar Event</label>
                             <input type="file" name="image" accept="image/*" class="w-full px-4 py-2 border rounded-lg">

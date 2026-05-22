@@ -83,6 +83,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-weight: 700;
         }
         
         
@@ -354,34 +355,35 @@
         <div class="header">
             <div class="logo">
                 <div class="logo-icon">
-                    <img src="{{ asset('assets/ketixlogo.png') }}" alt= "Logo Ketix" 
-                    style="widht: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                    <img src="{{ asset('assets/logo2.png') }}" alt= "Logo Ketix" 
+                    style="widht: 75%; height: 75%; object-fit: cover; border-radius: 12px;">
                 </div>
                 <h1>Ketix</h1>
             </div>
             <div class="nav">
                 <a href="{{ route('beranda') }}" class="{{ request()->routeIs('beranda') ? 'active' : '' }}">Beranda</a>
                 <a href="{{ route('jelajah') }}" class="{{ request()->routeIs('jelajah') ? 'active' : '' }}">Jelajah</a>
-                <a href="#">Tiket-ku</a>
+                @auth
+                    <a href="#">Tiket-ku</a>
+                @else
+                    <a href="{{ route('login') }}">Tiket-ku</a>
+                @endauth
             </div>
-             <div class="flex gap-3">
-        @auth
-            <span class="text-sm text-gray-600">Halo, {{ Auth::user()->name }}</span>
-            @if(Auth::user()->role == 'admin')
-                <a href="{{ route('admin.dashboard') }}" class="text-purple-600">Admin</a>
-            @endif
-            <form action="{{ route('logout') }}" method="POST" class="inline">
-                @csrf
-                <button type="submit" class="text-red-600">Logout</button>
-            </form>
-        @else
-            <a href="{{ route('login') }}" class="text-purple-600">Login</a>
-            <a href="{{ route('register') }}" class="text-gray-600">Daftar</a>
-        @endauth
-    </div>
-</div>
-            <div>
+            
+            <div class="flex gap-4 items-center">
+                <!-- Search Icon -->
                 <i class="fas fa-search" style="color: #9ca3af; font-size: 20px; cursor: pointer;"></i>
+                
+                @auth
+                    <span class="text-sm text-gray-600">Halo, {{ Auth::user()->name }}</span>
+                    @if(Auth::user()->role == 'admin')
+                        <a href="{{ route('admin.dashboard') }}" class="text-purple-600">Admin</a>
+                    @endif
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="text-red-600">Logout</button>
+                    </form>
+                @endauth
             </div>
         </div>
         
@@ -400,7 +402,7 @@
         </div>
         
         <div class="event-grid">
-            @forelse($events as $event)
+            @forelse($recommendedEvents as $event)
             <div class="event-card">
                 <img src="{{ $event->image ? asset($event->image) : 'https://picsum.photos/seed/'.$event->id.'/400/300' }}" alt="{{ $event->name }}" class="event-image">
                 <div class="event-content">
@@ -425,7 +427,7 @@
             @empty
             <div style="grid-column: 1 / -1; text-align: center; padding: 40px 0; color: #6b7280;">
                 <i class="fas fa-calendar-times" style="font-size: 48px; margin-bottom: 16px; color: #d1d5db;"></i>
-                <p>Belum ada event yang tersedia saat ini.</p>
+                <p>Belum ada event rekomendasi saat ini.</p>
             </div>
             @endforelse
         </div>
@@ -436,38 +438,20 @@
         </div>
         
         <div class="scroll-container">
+            @forelse($popularEvents as $event)
             <div class="popular-card">
-                <img src="https://picsum.photos/id/29/300/200" alt="Music Fest">
+                <img src="{{ $event->image ? asset($event->image) : 'https://picsum.photos/seed/pop'.$event->id.'/300/200' }}" alt="{{ $event->name }}">
                 <div class="content">
-                    <h4>Music Fest 2029</h4>
-                    <p style="font-size: 12px; color: #6b7280;">12 Mei 2029</p>
-                    <div class="popular-price">Rp 180.000</div>
+                    <h4>{{ $event->name }}</h4>
+                    <p style="font-size: 12px; color: #6b7280;">{{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</p>
+                    <div class="popular-price">Rp {{ number_format($event->price, 0, ',', '.') }}</div>
                 </div>
             </div>
-            <div class="popular-card">
-                <img src="https://picsum.photos/id/91/300/200" alt="Art Exhibition">
-                <div class="content">
-                    <h4>Art Exhibition</h4>
-                    <p style="font-size: 12px; color: #6b7280;">20 Mei 2029</p>
-                    <div class="popular-price">Rp 95.000</div>
-                </div>
+            @empty
+            <div style="padding: 20px; color: #6b7280; font-size: 14px;">
+                Belum ada event populer saat ini.
             </div>
-            <div class="popular-card">
-                <img src="https://picsum.photos/id/169/300/200" alt="Food Festival">
-                <div class="content">
-                    <h4>Food Festival</h4>
-                    <p style="font-size: 12px; color: #6b7280;">5 Juni 2029</p>
-                    <div class="popular-price">Rp 75.000</div>
-                </div>
-            </div>
-            <div class="popular-card">
-                <img src="https://picsum.photos/id/96/300/200" alt="Tech Summit">
-                <div class="content">
-                    <h4>Tech Summit 2029</h4>
-                    <p style="font-size: 12px; color: #6b7280;">15 Juni 2029</p>
-                    <div class="popular-price">Rp 350.000</div>
-                </div>
-            </div>
+            @endforelse
         </div>
         
         <div class="footer">
@@ -485,25 +469,7 @@
             });
         });
         
-    
-        document.querySelectorAll('.btn-beli').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                alert('✨ Tiket ditambahkan! ✨');
-            });
-        });
-        
-        
-        document.querySelectorAll('.nav a').forEach(link => {
-            if(link.getAttribute('href') !== '#') {
-                link.addEventListener('click', function(e) {
-                    if(this.getAttribute('href') === '#') {
-                        e.preventDefault();
-                        alert('Fitur sedang dalam pengembangan');
-                    }
-                });
-            }
-        });
+
     </script>
 </body>
 </html>

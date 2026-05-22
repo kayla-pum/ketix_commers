@@ -388,175 +388,64 @@
             <div class="nav">
                 <a href="{{ route('beranda') }}" class="{{ request()->routeIs('beranda') ? 'active' : '' }}">Beranda</a>
                 <a href="{{ route('jelajah') }}" class="{{ request()->routeIs('jelajah') ? 'active' : '' }}">Jelajah</a>
-                <a href="#">Tiket-ku</a>
+                @auth
+                    <a href="#">Tiket-ku</a>
+                @else
+                    <a href="{{ route('login') }}">Tiket-ku</a>
+                @endauth
             </div>
-            <div>
+            
+            <div class="flex gap-4 items-center">
+                <!-- Search Icon -->
                 <i class="fas fa-search" style="color: #9ca3af; font-size: 20px; cursor: pointer;"></i>
+                
+                @auth
+                    <span class="text-sm text-gray-600">Halo, {{ Auth::user()->name }}</span>
+                    @if(Auth::user()->role == 'admin')
+                        <a href="{{ route('admin.dashboard') }}" class="text-purple-600">Admin</a>
+                    @endif
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="text-red-600">Logout</button>
+                    </form>
+                @endauth
             </div>
         </div>
         
-        <!-- Rekomendasi Section -->
         <div class="section-header">
-            <h2>🔥 Rekomendasi</h2>
-            <a href="#">Lihat semua <i class="fas fa-arrow-right"></i></a>
+            <h2>🌍 Semua Event</h2>
         </div>
         
-        <!-- Grid Event (Static) -->
         <div class="event-grid">
-            <!-- Card 1: Peanuts Fest -->
+            @forelse($events as $event)
             <div class="event-card">
-                <img src="https://picsum.photos/id/104/400/300" alt="Peanuts Fest" class="event-image">
+                <img src="{{ $event->image ? asset($event->image) : 'https://picsum.photos/seed/'.$event->id.'/400/300' }}" alt="{{ $event->name }}" class="event-image">
                 <div class="event-content">
                     <div class="event-header">
-                        <h3>Peanuts Fest</h3>
-                        <span class="category">Festival</span>
+                        <h3>{{ $event->name }}</h3>
+                        <span class="category">{{ $event->category ?? 'Event' }}</span>
                     </div>
                     <div class="event-info">
                         <i class="far fa-calendar-alt"></i>
-                        <span>25 April 2029</span>
+                        <span>{{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</span>
                     </div>
                     <div class="event-info">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>Jakarta Convention Center</span>
+                        <span>{{ $event->location }}</span>
                     </div>
                     <div class="event-footer">
-                        <span class="price">Rp 320.000</span>
+                        <span class="price">Rp {{ number_format($event->price, 0, ',', '.') }}</span>
                         <button class="btn-beli"><i class="fas fa-ticket-alt"></i> Beli</button>
                     </div>
                 </div>
             </div>
-            
-            <!-- Card 2: Jazz Night -->
-            <div class="event-card">
-                <img src="https://picsum.photos/id/107/400/300" alt="Jazz Night" class="event-image">
-                <div class="event-content">
-                    <div class="event-header">
-                        <h3>Jazz Night Vibes</h3>
-                        <span class="category">Konser</span>
-                    </div>
-                    <div class="event-info">
-                        <i class="far fa-calendar-alt"></i>
-                        <span>10 Mei 2029</span>
-                    </div>
-                    <div class="event-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Taman Ismail Marzuki</span>
-                    </div>
-                    <div class="event-footer">
-                        <span class="price">Rp 450.000</span>
-                        <button class="btn-beli"><i class="fas fa-ticket-alt"></i> Beli</button>
-                    </div>
-                </div>
+            @empty
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px 0; color: #6b7280;">
+                <i class="fas fa-calendar-times" style="font-size: 48px; margin-bottom: 16px; color: #d1d5db;"></i>
+                <p>Belum ada event yang tersedia saat ini.</p>
             </div>
-            
-            <!-- Card 3: Comedy Show -->
-            <div class="event-card">
-                <img src="https://picsum.photos/id/20/400/300" alt="Comedy Show" class="event-image">
-                <div class="event-content">
-                    <div class="event-header">
-                        <h3>Comedy Showdown</h3>
-                        <span class="category">Komedi</span>
-                    </div>
-                    <div class="event-info">
-                        <i class="far fa-calendar-alt"></i>
-                        <span>3 Juni 2029</span>
-                    </div>
-                    <div class="event-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Teater Jakarta</span>
-                    </div>
-                    <div class="event-footer">
-                        <span class="price">Rp 200.000</span>
-                        <button class="btn-beli"><i class="fas fa-ticket-alt"></i> Beli</button>
-                    </div>
-                </div>
-            </div>
+            @endforelse
         </div>
-        
-        <!-- Populer Section -->
-        <div class="section-header">
-            <h2>⭐ Populer Minggu Ini</h2>
-            <a href="#">Lihat semua <i class="fas fa-arrow-right"></i></a>
-        </div>
-        
-        <div class="scroll-container">
-            <div class="popular-card">
-                <img src="https://picsum.photos/id/29/300/200" alt="Music Fest">
-                <div class="content">
-                    <h4>Music Fest 2029</h4>
-                    <p style="font-size: 12px; color: #6b7280;">12 Mei 2029</p>
-                    <div class="popular-price">Rp 180.000</div>
-                </div>
-            </div>
-            <div class="popular-card">
-                <img src="https://picsum.photos/id/91/300/200" alt="Art Exhibition">
-                <div class="content">
-                    <h4>Art Exhibition</h4>
-                    <p style="font-size: 12px; color: #6b7280;">20 Mei 2029</p>
-                    <div class="popular-price">Rp 95.000</div>
-                </div>
-            </div>
-            <div class="popular-card">
-                <img src="https://picsum.photos/id/169/300/200" alt="Food Festival">
-                <div class="content">
-                    <h4>Food Festival</h4>
-                    <p style="font-size: 12px; color: #6b7280;">5 Juni 2029</p>
-                    <div class="popular-price">Rp 75.000</div>
-                </div>
-            </div>
-            <div class="popular-card">
-                <img src="https://picsum.photos/id/96/300/200" alt="Tech Summit">
-                <div class="content">
-                    <h4>Tech Summit 2029</h4>
-                    <p style="font-size: 12px; color: #6b7280;">15 Juni 2029</p>
-                    <div class="popular-price">Rp 350.000</div>
-                </div>
-            </div>
-        </div>
-         <!-- Card 2: Jazz Night -->
-            <div class="event-card2">
-                <img src="https://picsum.photos/id/107/400/300" alt="Jazz Night" class="event-image">
-                <div class="event-content">
-                    <div class="event-header">
-                        <h3>Jazz Night Vibes</h3>
-                        <span class="category">Konser</span>
-                    </div>
-                    <div class="event-info">
-                        <i class="far fa-calendar-alt"></i>
-                        <span>10 Mei 2029</span>
-                    </div>
-                    <div class="event-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Taman Ismail Marzuki</span>
-                    </div>
-                    <div class="event-footer">
-                        <span class="price">Rp 450.000</span>
-                        <button class="btn-beli"><i class="fas fa-ticket-alt"></i> Beli</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 2: Jazz Night -->
-            <div class="event-card2">
-                <img src="https://picsum.photos/id/107/400/300" alt="Jazz Night" class="event-image">
-                <div class="event-content">
-                    <div class="event-header">
-                        <h3>Jazz Night Vibes</h3>
-                        <span class="category">Konser</span>
-                    </div>
-                    <div class="event-info">
-                        <i class="far fa-calendar-alt"></i>
-                        <span>10 Mei 2029</span>
-                    </div>
-                    <div class="event-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Taman Ismail Marzuki</span>
-                    </div>
-                    <div class="event-footer">
-                        <span class="price">Rp 450.000</span>
-                        <button class="btn-beli"><i class="fas fa-ticket-alt"></i> Beli</button>
-                    </div>
-                </div>
-            </div>
         
         <!-- Footer -->
         <div class="footer">
