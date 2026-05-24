@@ -25,6 +25,7 @@ class CheckoutController extends Controller
 
         $request->validate([
             'quantity' => 'required|integer|min:1|max:10',
+            'payment_method' => 'required|in:BCA,Mandiri',
             'attendee_name' => 'required|array|min:1',
             'attendee_ktp' => 'required|array|min:1',
             'attendee_phone' => 'required|array|min:1',
@@ -33,17 +34,17 @@ class CheckoutController extends Controller
             'attendee_ktp.*' => 'required|string',
             'attendee_phone.*' => 'required|string',
             'attendee_email.*' => 'required|email',
-        ]);
-
+            ]);
         $quantity = $request->quantity;
         $total_price = $event->price * $quantity;
 
         // Create Order
         $order = Order::create([
-            'user_id' => Auth::id(),
-            'event_id' => $event->id,
-            'quantity' => $quantity,
-            'total_price' => $total_price,
+             'user_id' => Auth::id(),
+             'event_id' => $event->id,
+             'quantity' => $quantity,
+             'total_price' => $total_price,
+             'payment_method' => $request->payment_method,
             'status' => 'success'
         ]);
 

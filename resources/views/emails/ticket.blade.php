@@ -43,9 +43,81 @@
                     <th>Status</th>
                     <td style="color: green; font-weight: bold;">LUNAS</td>
                 </tr>
-            </table>
+                </table>
 
-            <h3>E-Tiket Anda</h3>
+@php
+    $banks = [
+        'BCA' => [
+            'number' => '356478634924',
+            'name' => 'Kirana Ayunda'
+        ],
+
+        'Mandiri' => [
+            'number' => '27893654832',
+            'name' => 'Kirana Ayunda'
+        ]
+    ];
+
+    $selectedBank = $banks[$order->payment_method] ?? null;
+@endphp
+
+@if($selectedBank)
+<div style="
+    background:#f9fafb;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+    border:1px solid #e5e7eb;
+">
+    
+    <h3 style="
+        margin-top:0;
+        color:#334EAC;
+        margin-bottom:15px;
+    ">
+        Informasi Transfer Bank
+    </h3>
+
+    <table style="width:100%;">
+        <tr>
+            <td style="padding:6px 0;"><strong>Bank</strong></td>
+            <td style="padding:6px 0;">
+                {{ $order->payment_method }}
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding:6px 0;"><strong>No Rekening</strong></td>
+            <td style="
+                padding:6px 0;
+                font-weight:bold;
+                color:#334EAC;
+                letter-spacing:1px;
+            ">
+                {{ $selectedBank['number'] }}
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding:6px 0;"><strong>Atas Nama</strong></td>
+            <td style="padding:6px 0;">
+                {{ $selectedBank['name'] }}
+            </td>
+        </tr>
+    </table>
+
+    <p style="
+        margin-top:15px;
+        font-size:13px;
+        color:#6b7280;
+    ">
+        Silakan lakukan transfer sesuai total pembayaran ke rekening di atas.
+    </p>
+
+</div>
+@endif
+
+<h3>E-Tiket Anda</h3>
             @foreach($tickets as $ticket)
             <div class="ticket">
                 <p><strong>Nama:</strong> {{ $ticket->name }}</p>
