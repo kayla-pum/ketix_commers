@@ -19,4 +19,9 @@ class Event extends Model
         'is_recommended',
         'is_popular'
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

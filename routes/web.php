@@ -5,6 +5,8 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 
+use App\Http\Controllers\CheckoutController;
+
 // Route untuk user
 Route::get('/', [EventController::class, 'index'])->name('beranda');
 Route::get('/jelajah', [EventController::class, 'explore'])->name('jelajah');
@@ -15,6 +17,15 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Route Checkout & Tiket-ku (Wajib Login)
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout/{id}', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('/checkout/{id}', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/checkout/success/{id}', [CheckoutController::class, 'success'])->name('checkout.success');
+    
+    Route::get('/tiket-ku', [CheckoutController::class, 'history'])->name('tiket-ku');
+});
 
 // Route Admin
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {

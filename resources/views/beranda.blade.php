@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ketix - Platform Tiket Event</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
@@ -364,7 +364,7 @@
                 <a href="{{ route('beranda') }}" class="{{ request()->routeIs('beranda') ? 'active' : '' }}">Beranda</a>
                 <a href="{{ route('jelajah') }}" class="{{ request()->routeIs('jelajah') ? 'active' : '' }}">Jelajah</a>
                 @auth
-                    <a href="#">Tiket-ku</a>
+                    <a href="{{ route('tiket-ku') }}">Tiket-ku</a>
                 @else
                     <a href="{{ route('login') }}">Tiket-ku</a>
                 @endauth
@@ -375,7 +375,6 @@
                 <i class="fas fa-search" style="color: #9ca3af; font-size: 20px; cursor: pointer;"></i>
                 
                 @auth
-                    <span class="text-sm text-gray-600">Halo, {{ Auth::user()->name }}</span>
                     @if(Auth::user()->role == 'admin')
                         <a href="{{ route('admin.dashboard') }}" class="text-purple-600">Admin</a>
                     @endif
@@ -420,7 +419,7 @@
                     </div>
                     <div class="event-footer">
                         <span class="price">Rp {{ number_format($event->price, 0, ',', '.') }}</span>
-                        <button class="btn-beli"><i class="fas fa-ticket-alt"></i> Beli</button>
+                        <a href="{{ route('checkout', $event->id) }}" class="btn-beli inline-block text-center text-sm"><i class="fas fa-ticket-alt"></i> Beli</a>
                     </div>
                 </div>
             </div>
@@ -466,14 +465,6 @@
                 if(e.target.closest('.btn-beli')) return;
                 const eventName = this.querySelector('h3')?.innerText || 'Event';
                 alert(`Detail event: ${eventName}`);
-            });
-        });
-        
-        // Tombol beli handler
-        document.querySelectorAll('.btn-beli').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                alert('✨ Tiket ditambahkan! ✨');
             });
         });
         
