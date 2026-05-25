@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="max-w-4xl mx-auto py-10 px-4">
-        <a href="{{ url()->previous() }}" class="text-purple-600 mb-6 inline-block hover:underline">
+        <a href="{{ url()->previous() }}" class="text-[#334EAC] mb-6 inline-block hover:underline">
             <i class="fas fa-arrow-left mr-2"></i> Kembali
         </a>
         
