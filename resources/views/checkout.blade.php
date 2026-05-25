@@ -18,7 +18,7 @@
         </a>
         
         <div class="bg-white rounded-2xl shadow-sm overflow-hidden mb-6">
-            <div class="p-6 md:p-8 bg-gradient-to-r from-purple-800 to-indigo-900 text-white">
+            <div class="p-6 md:p-8 bg-gradient-to-r from-[#334EAC] to-indigo-900 text-white">
                 <h1 class="text-3xl font-bold mb-2">Checkout Tiket</h1>
                 <p class="opacity-90">{{ $event->name }} &bull; {{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</p>
             </div>
@@ -39,7 +39,7 @@
                     
                     <div class="mb-8">
                         <label class="block text-gray-700 font-bold mb-2 text-lg">Jumlah Tiket</label>
-                        <select name="quantity" id="quantity" class="w-full md:w-1/3 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:outline-none bg-white">
+                        <select name="quantity" id="quantity" class="w-full md:w-1/3 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#334EAC] focus:outline-none bg-white">
                             @for($i=1; $i<=5; $i++)
                                 <option value="{{ $i }}">{{ $i }} Tiket (Rp {{ number_format($event->price * $i, 0, ',', '.') }})</option>
                             @endfor
@@ -128,10 +128,10 @@
                     <div class="border-t pt-6 mt-8">
                         <div class="flex justify-between items-center mb-6">
                             <span class="text-gray-600 text-lg">Total Pembayaran:</span>
-                            <span class="text-2xl font-bold text-purple-700" id="totalPriceDisplay">Rp {{ number_format($event->price, 0, ',', '.') }}</span>
+                            <span class="text-2xl font-bold text-[#334EAC]" id="totalPriceDisplay">Rp {{ number_format($event->price, 0, ',', '.') }}</span>
                         </div>
                         
-                        <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-xl transition duration-300 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        <button type="submit" class="w-full bg-[#334EAC] hover:bg-gray-600 text-white font-bold py-4 px-8 rounded-xl transition duration-300 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                             <i class="fas fa-lock mr-2"></i> Pesan Sekarang & Kirim E-Tiket
                         </button>
                     </div>
@@ -163,7 +163,7 @@
 
                 const formHtml = `
                     <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-6 ticket-form-block" data-index="${i}">
-                        <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Identitas Tiket ${i} ${i===1 ? '<span class="text-sm font-normal text-purple-600 bg-purple-100 px-2 py-1 rounded ml-2">Pemesan Utama</span>' : ''}</h3>
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Identitas Tiket ${i} ${i===1 ? '<span class="text-sm font-normal text-white bg-[#334EAC] px-2 py-1 rounded ml-2">Pemesan Utama</span>' : ''}</h3>
                         ${copyToggleHtml}
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
