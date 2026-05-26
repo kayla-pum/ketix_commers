@@ -59,7 +59,7 @@
     <div class="space-y-4">
 
         <!-- BCA -->
-        <label class="flex items-start p-4 border rounded-xl cursor-pointer hover:border-purple-500 transition">
+        <label class="flex items-start p-4 border rounded-xl cursor-pointer hover:border-[#334EAC] transition">
 
             <input 
                 type="radio" 
@@ -89,7 +89,7 @@
         </label>
 
         <!-- Mandiri -->
-        <label class="flex items-start p-4 border rounded-xl cursor-pointer hover:border-purple-500 transition">
+        <label class="flex items-start p-4 border rounded-xl cursor-pointer hover:border-[#334EAC] transition">
 
             <input 
                 type="radio" 
@@ -154,9 +154,9 @@
                 let copyToggleHtml = '';
                 if(i > 1) {
                     copyToggleHtml = `
-                        <div class="mb-4 bg-purple-50 p-3 rounded-lg border border-purple-100 flex items-center">
-                            <input type="checkbox" id="copy_from_1_${i}" class="copy-toggle w-5 h-5 text-purple-600 rounded" data-target="${i}">
-                            <label for="copy_from_1_${i}" class="ml-3 text-purple-700 font-medium cursor-pointer">Samakan dengan data pemesan utama (Tiket 1)</label>
+                        <div class="mb-4 bg-[#334EAC] p-3 rounded-lg border border-[#334EAC] flex items-center">
+                            <input type="checkbox" id="copy_from_1_${i}" class="copy-toggle w-5 h-5 text-[#334EAC] rounded" data-target="${i}">
+                            <label for="copy_from_1_${i}" class="ml-3 text-white font-medium cursor-pointer">Samakan dengan data pemesan utama (Tiket 1)</label>
                         </div>
                     `;
                 }
@@ -168,19 +168,19 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-gray-600 text-sm font-medium mb-1">Nama Lengkap</label>
-                                <input type="text" name="attendee_name[]" id="name_${i}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-600 outline-none" required>
+                                <input type="text" name="attendee_name[]" id="name_${i}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#334EAC] outline-none" required>
                             </div>
                             <div>
                                 <label class="block text-gray-600 text-sm font-medium mb-1">Nomor KTP</label>
-                                <input type="text" name="attendee_ktp[]" id="ktp_${i}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-600 outline-none" required>
+                                <input type="text" name="attendee_ktp[]" id="ktp_${i}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#334EAC] outline-none" required>
                             </div>
                             <div>
                                 <label class="block text-gray-600 text-sm font-medium mb-1">No Telp</label>
-                                <input type="text" name="attendee_phone[]" id="phone_${i}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-600 outline-none" required>
+                                <input type="text" name="attendee_phone[]" id="phone_${i}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#334EAC] outline-none" required>
                             </div>
                             <div>
                                 <label class="block text-gray-600 text-sm font-medium mb-1">Email (Pengiriman E-Tiket)</label>
-                                <input type="email" name="attendee_email[]" id="email_${i}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-600 outline-none" required>
+                                <input type="email" name="attendee_email[]" id="email_${i}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#334EAC] outline-none" required>
                             </div>
                         </div>
                     </div>

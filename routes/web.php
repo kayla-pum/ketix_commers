@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
 // Route Admin
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/orders', [AdminController::class, 'orders'])->name('orders');
     Route::get('/events/create', [AdminController::class, 'create'])->name('events.create');
     Route::post('/events', [AdminController::class, 'store'])->name('events.store');
     Route::get('/events/{id}/edit', [AdminController::class, 'edit'])->name('events.edit');

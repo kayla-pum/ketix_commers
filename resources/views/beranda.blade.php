@@ -300,6 +300,32 @@
             font-weight: 700;
             font-size: 14px;
             margin-top: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .popular-card .btn-beli-popular {
+            background: linear-gradient(135deg, #334EAC, #334EAC);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+            text-decoration: none;
+            width: 100%;
+            text-align: center;
+            font-size: 13px;
+        }
+        
+        .popular-card .btn-beli-popular:hover {
+            transform: scale(0.98);
+            box-shadow: 0 4px 12px rgba(51, 78, 172, 0.3);
+        }
+        
+        .popular-card .btn-beli-popular:active {
+            transform: scale(0.95);
         }
         
         .event-db-section {
@@ -385,16 +411,7 @@
                 @endauth
             </div>
         </div>
-        
-        <div class="banner">
-            <div>
-                <p>✨ Flash Sale</p>
-                <h3>Diskon 20%</h3>
-                <p>Kode: KETIX20</p>
-            </div>
-            <i class="fas fa-tags"></i>
-        </div>
-        
+
         <div class="section-header">
             <h2>🔥 Rekomendasi</h2>
             <a href="#">Lihat semua <i class="fas fa-arrow-right"></i></a>
@@ -444,6 +461,7 @@
                     <h4>{{ $event->name }}</h4>
                     <p style="font-size: 12px; color: #6b7280;">{{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</p>
                     <div class="popular-price">Rp {{ number_format($event->price, 0, ',', '.') }}</div>
+                    <a href="{{ route('checkout', $event->id) }}" class="btn-beli-popular"><i class="fas fa-ticket-alt" style="margin-right: 4px;"></i> Beli</a>
                 </div>
             </div>
             @empty
@@ -459,12 +477,34 @@
     </div>
     
     <script>
+        // Check if user is authenticated
+        const isAuthenticated = {{ Auth::check() ? 'true' : 'false' }};
+        const loginUrl = '{{ route("login") }}';
     
         document.querySelectorAll('.event-card').forEach(card => {
             card.addEventListener('click', function(e) {
                 if(e.target.closest('.btn-beli')) return;
                 const eventName = this.querySelector('h3')?.innerText || 'Event';
                 alert(`Detail event: ${eventName}`);
+            });
+        });
+        
+        // Handle click on buy buttons
+        document.querySelectorAll('.btn-beli, .btn-beli-popular').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const checkoutUrl = this.getAttribute('href');
+                
+                if(!isAuthenticated) {
+                    // User is not authenticated
+                    const confirmLogin = confirm('Anda harus login untuk membeli tiket. Apakah Anda ingin login sekarang?');
+                    if(confirmLogin) {
+                        window.location.href = loginUrl;
+                    }
+                } else {
+                    // User is authenticated, proceed to checkout
+                    window.location.href = checkoutUrl;
+                }
             });
         });
         

@@ -380,8 +380,8 @@
         <div class="header">
             <div class="logo">
                 <div class="logo-icon">
-                    <img src="{{ asset('assets/ketixlogo.png') }}" alt= "Logo Ketix" 
-                    style="widht: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                    <img src="{{ asset('assets/logo2.png') }}" alt= "Logo Ketix" 
+                    style="widht: 75%; height: 75%; object-fit: cover; border-radius: 12px;">
                 </div>
                 <h1>Ketix</h1>
             </div>
@@ -400,7 +400,6 @@
                 <i class="fas fa-search" style="color: #9ca3af; font-size: 20px; cursor: pointer;"></i>
                 
                 @auth
-                    <span class="text-sm text-gray-600">Halo, {{ Auth::user()->name }}</span>
                     @if(Auth::user()->role == 'admin')
                         <a href="{{ route('admin.dashboard') }}" class="text-purple-600">Admin</a>
                     @endif

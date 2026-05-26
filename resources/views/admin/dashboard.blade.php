@@ -21,6 +21,10 @@
                         <i class="fas fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </a>
+                    <a href="{{ route('admin.orders') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-700 transition">
+                        <i class="fas fa-receipt"></i>
+                        <span>Penjualan</span>
+                    </a>
                     <a href="{{ route('admin.events.create') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-700 transition">
                         <i class="fas fa-plus-circle"></i>
                         <span>Tambah Event</span>
@@ -69,9 +73,18 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-gray-500 text-sm">Pendapatan</p>
-                                <p class="text-3xl font-bold text-blue-600">Rp 0</p>
+                                <p class="text-3xl font-bold text-blue-600">Rp {{ number_format($totalRevenue ?? 0, 0, ',', '.') }}</p>
                             </div>
                             <i class="fas fa-money-bill text-4xl text-blue-200"></i>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Total Penjualan</p>
+                                <p class="text-3xl font-bold text-orange-600">{{ $totalOrders ?? 0 }}</p>
+                            </div>
+                            <i class="fas fa-shopping-cart text-4xl text-orange-200"></i>
                         </div>
                     </div>
                 </div>

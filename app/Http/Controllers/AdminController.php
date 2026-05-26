@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -15,8 +16,10 @@ class AdminController extends Controller
     public function dashboard()
     {
         $totalEvents = Event::count();
+        $totalRevenue = Order::where('status', 'success')->sum('total_price');
+        $totalOrders = Order::where('status', 'success')->count();
         $events = Event::latest()->paginate(10);
-        return view('admin.dashboard', compact('events', 'totalEvents'));
+        return view('admin.dashboard', compact('events', 'totalEvents', 'totalRevenue', 'totalOrders'));
     }
     
     public function create()
@@ -110,5 +113,12 @@ class AdminController extends Controller
         $event->delete();
         
         return redirect()->route('admin.dashboard')->with('success', 'Event berhasil dihapus!');
+    }
+
+    public function orders()
+    {
+        $orders = Order::with('user', 'event')->where('status', 'success')->latest()->paginate(15);
+        $totalRevenue = Order::where('status', 'success')->sum('total_price');
+        return view('admin.orders', compact('orders', 'totalRevenue'));
     }
 }
