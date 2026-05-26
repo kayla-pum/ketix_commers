@@ -1,8 +1,5 @@
 # 🎟️ Ketix - Website E-Commerce Pembelian Tiket
 
-<p align="center">
-  <img src="assets/login.png" width="80%" alt="Halaman Login">
-</p>
 
 ## 📖 Deskripsi Singkat
 
