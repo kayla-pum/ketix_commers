@@ -15,7 +15,7 @@ Website ini memiliki tampilan modern, responsif, dan user-friendly sehingga peng
 ## 🔑 Halaman Login
 
 <p align="center">
-  <img src="assets/login.png" width="80%" alt="Halaman Login Ketix">
+  <img src="public/assets/login.png" width="80%" alt="Halaman Login Ketix">
 </p>
 
 Halaman login digunakan untuk autentikasi pengguna sebelum masuk ke dalam sistem Ketix.
@@ -24,16 +24,14 @@ Halaman login digunakan untuk autentikasi pengguna sebelum masuk ke dalam sistem
 ## 🏠 Halaman Beranda
 
 <p align="center">
-  <img src="assets/beranda.png" width="80%" alt="Halaman Beranda Ketix">
+  <img src="public/assets/beranda.png" width="80%" alt="Halaman Beranda Ketix">
 </p>
 
 Halaman utama yang menampilkan berbagai event dan tiket yang tersedia untuk dibeli.
 
 ---
 ## 📋 Create Order Table
-
-<p align="center">
-  | Field       | Tipe Data | Deskripsi          |
+| Field       | Tipe Data | Deskripsi          |
 | ----------- | --------- | ------------------ |
 | id          | bigint    | ID unik order      |
 | user_id     | foreignId | Relasi ke pengguna |
@@ -44,15 +42,13 @@ Halaman utama yang menampilkan berbagai event dan tiket yang tersedia untuk dibe
 | created_at  | timestamp | Waktu dibuat       |
 | updated_at  | timestamp | Waktu diperbarui   |
 
-</p>
-
 Fitur create order memungkinkan pengguna memilih tiket, jumlah pembelian, serta melihat detail pesanan secara langsung.
 
 ---
 ## 💳 Halaman Checkout
 
 <p align="center">
-  <img src="assets/Checkout.png" width="80%" alt="Halaman Checkout">
+  <img src="public/assets/Checkout.png" width="80%" alt="Halaman Checkout">
 </p>
 
 Halaman checkout digunakan untuk menyelesaikan transaksi pembelian tiket dengan metode pembayaran yang tersedia.
