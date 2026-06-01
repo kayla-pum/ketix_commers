@@ -32,7 +32,7 @@
         </div>
         
         <div class="flex gap-4 flex-col sm:flex-row">
-            <a href="{{ route('tiket-ku') }}" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition">
+            <a href="{{ route('tiket-ku') }}" class="flex-1 bg-purple-600 hover:bg-[#334EAC] text-white font-semibold py-3 px-6 rounded-xl transition">
                 Lihat Tiket-ku
             </a>
             <a href="{{ route('beranda') }}" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-xl transition">
