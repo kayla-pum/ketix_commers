@@ -1,17 +1,12 @@
-# 🎟️ Ketix — Online Ticket Sales Platform 🚀
 
+# 🎟️ Ketix — Online Ticket Sales Platform 🚀
+---
+![Desain Awal](public/assets/beranda2.png)
+---
 Ketix adalah platform **penjualan tiket event online** yang membantu pengguna menemukan event favorit 🎉, melakukan checkout dengan mudah 🛒, memilih metode pembayaran 💳, dan menerima **e-ticket otomatis** ✉️.
 
 Admin juga dapat mengelola event serta melihat data penjualan melalui dashboard 📊.
 
----
-
-# 🖼️ Preview Desain
-
-## 🎨 Desain Awal
-> Letakkan gambar desain awal di sini
-
-![Desain Awal](public/assets/beranda2.png)
 ---
 
 # ⚙️ Teknologi Yang Digunakan
@@ -149,16 +144,6 @@ http://127.0.0.1:8000
 🧩 Semua relasi menggunakan **Foreign Key**  
 🗑️ Delete otomatis memakai **Cascade**  
 🕒 Kolom `created_at` dan `updated_at` dipakai untuk audit data  
-
----
-
-# 📁 Struktur File Gambar
-
-```text
-docs/
-├── design-awal.png
-└── design-database.png
-```
 
 ---
 
