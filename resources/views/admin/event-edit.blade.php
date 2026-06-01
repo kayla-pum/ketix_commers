@@ -75,6 +75,7 @@
                                 <option value="Komedi" {{ $event->category == 'Komedi' ? 'selected' : '' }}>Komedi</option>
                                 <option value="Pameran" {{ $event->category == 'Pameran' ? 'selected' : '' }}>Pameran</option>
                                 <option value="Workshop" {{ $event->category == 'Workshop' ? 'selected' : '' }}>Workshop</option>
+                                <option value="Olahraga" {{ $event->category == 'Olahraga' ? 'selected' : '' }}>Olahraga</option>
                             </select>
                         </div>
                         

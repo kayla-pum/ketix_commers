@@ -351,7 +351,23 @@
             
             .header {
                 flex-direction: column;
-                gap: 16px;
+                gap: 20px;
+                padding: 20px;
+                border-radius: 16px;
+                text-align: center;
+            }
+            
+            .nav {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 12px;
+                padding: 8px 16px;
+            }
+            
+            .nav a {
+                padding: 6px 12px;
+                font-size: 14px;
             }
             
             .event-grid {
@@ -370,6 +386,19 @@
             
             .event-db-section {
                 padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 24px;
+            }
+            .nav {
+                gap: 6px;
+            }
+            .nav a {
+                padding: 6px 10px;
+                font-size: 13px;
             }
         }
     </style>
