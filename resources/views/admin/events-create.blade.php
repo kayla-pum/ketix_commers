@@ -11,22 +11,22 @@
 <body class="bg-gray-100 font-['Inter']">
     <div class="flex h-screen">
         <!-- Sidebar sama seperti dashboard -->
-        <div class="w-64 bg-gradient-to-b from-purple-800 to-indigo-900 text-white">
+        <div class="w-64 bg-[#334EAC] text-white">
             <div class="p-5">
                 <div class="flex items-center gap-3 mb-8">
                     <i class="fas fa-ticket-alt text-2xl"></i>
                     <span class="text-xl font-bold">Ketix Admin</span>
                 </div>
                 <nav class="space-y-2">
-                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-700 transition">
+                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#334EAC] transition">
                         <i class="fas fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </a>
-                    <a href="{{ route('admin.events.create') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-purple-700">
+                    <a href="{{ route('admin.events.create') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-[#334EAC]">
                         <i class="fas fa-plus-circle"></i>
                         <span>Tambah Event</span>
                     </a>
-                    <a href="{{ route('beranda') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-700 transition">
+                    <a href="{{ route('beranda') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#334EAC] transition">
                         <i class="fas fa-globe"></i>
                         <span>Lihat Website</span>
                     </a>
@@ -47,28 +47,28 @@
                         
                         <div class="mb-4">
                             <label class="block text-gray-700 font-medium mb-2">Nama Event</label>
-                            <input type="text" name="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+                            <input type="text" name="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#334EAC]" required>
                         </div>
                         
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <div>
                                 <label class="block text-gray-700 font-medium mb-2">Tanggal</label>
-                                <input type="date" name="date" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+                                <input type="date" name="date" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#334EAC]" required>
                             </div>
                             <div>
                                 <label class="block text-gray-700 font-medium mb-2">Harga (Rp)</label>
-                                <input type="number" name="price" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+                                <input type="number" name="price" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#334EAC]" required>
                             </div>
                         </div>
                         
                         <div class="mb-4">
                             <label class="block text-gray-700 font-medium mb-2">Lokasi</label>
-                            <input type="text" name="location" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+                            <input type="text" name="location" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#334EAC]" required>
                         </div>
                         
                         <div class="mb-4">
                             <label class="block text-gray-700 font-medium mb-2">Kategori</label>
-                            <select name="category" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+                            <select name="category" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#334EAC]" required>
                                 <option value="">Pilih Kategori</option>
                                 <option value="Festival">Festival</option>
                                 <option value="Konser">Konser</option>
@@ -81,11 +81,11 @@
                         
                         <div class="mb-6 flex gap-6">
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" name="is_recommended" value="1" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                <input type="checkbox" name="is_recommended" value="1" class="w-4 h-4 text-[#334EAC] rounded focus:ring-[#334EAC]">
                                 <span class="text-gray-700 font-medium">Jadikan Rekomendasi</span>
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" name="is_popular" value="1" class="w-4 h-4 text-purple-600 rounded focus:ring-purple-500">
+                                <input type="checkbox" name="is_popular" value="1" class="w-4 h-4 text-[#334EAC] rounded focus:ring-[#334EAC]">
                                 <span class="text-gray-700 font-medium">Jadikan Populer</span>
                             </label>
                         </div>
@@ -97,7 +97,7 @@
                         </div>
                         
                         <div class="flex gap-3">
-                            <button type="submit" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">
+                            <button type="submit" class="bg-[#334EAC] text-white px-6 py-2 rounded-lg hover:bg-[#2f48b5]">
                                 Simpan Event
                             </button>
                             <a href="{{ route('admin.dashboard') }}" class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400">

@@ -10,26 +10,26 @@
 </head>
 <body class="bg-gray-100 font-['Inter']">
     <div class="flex h-screen">
-        <div class="w-64 bg-gradient-to-b from-purple-800 to-indigo-900 text-white">
+        <div class="w-64 bg-[#334EAC] text-white">
             <div class="p-5">
                 <div class="flex items-center gap-3 mb-8">
                     <i class="fas fa-ticket-alt text-2xl"></i>
                     <span class="text-xl font-bold">Ketix Admin</span>
                 </div>
                 <nav class="space-y-2">
-                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-700 transition">
+                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#334EAC] transition">
                         <i class="fas fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </a>
-                    <a href="{{ route('admin.orders') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-purple-700">
+                    <a href="{{ route('admin.orders') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-[#334EAC]">
                         <i class="fas fa-receipt"></i>
                         <span>Penjualan</span>
                     </a>
-                    <a href="{{ route('admin.events.create') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-700 transition">
+                    <a href="{{ route('admin.events.create') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#334EAC] transition">
                         <i class="fas fa-plus-circle"></i>
                         <span>Tambah Event</span>
                     </a>
-                    <a href="{{ route('beranda') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-700 transition">
+                    <a href="{{ route('beranda') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#334EAC] transition">
                         <i class="fas fa-globe"></i>
                         <span>Lihat Website</span>
                     </a>
@@ -73,9 +73,9 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-gray-500 text-sm">Rata-rata Pembelian</p>
-                                <p class="text-3xl font-bold text-purple-600">Rp {{ $orders->total() > 0 ? number_format($totalRevenue / $orders->total(), 0, ',', '.') : '0' }}</p>
+                                <p class="text-3xl font-bold text-[#334EAC]">Rp {{ $orders->total() > 0 ? number_format($totalRevenue / $orders->total(), 0, ',', '.') : '0' }}</p>
                             </div>
-                            <i class="fas fa-chart-line text-4xl text-purple-200"></i>
+                            <i class="fas fa-chart-line text-4xl text-[#9db3eb]"></i>
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                             <tbody class="divide-y">
                                 @forelse($orders as $order)
                                 <tr>
-                                    <td class="px-6 py-4 font-medium text-purple-600">#{{ $order->id }}</td>
+                                    <td class="px-6 py-4 font-medium text-[#334EAC]">#{{ $order->id }}</td>
                                     <td class="px-6 py-4">
                                         <div class="font-medium">{{ $order->user->name ?? 'N/A' }}</div>
                                         <div class="text-sm text-gray-500">{{ $order->user->email ?? 'N/A' }}</div>

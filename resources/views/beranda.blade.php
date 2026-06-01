@@ -336,13 +336,91 @@
             color: white;
         }
         
-        .footer {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 40px;
+        /* Premium Footer Styles */
+        .footer-premium {
+            background: #334EAC;
+            border-radius: 24px;
+            padding: 60px 50px 30px 50px;
+            margin-top: 50px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(51, 78, 172, 0.15);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 40px;
+            margin-bottom: 25px;
+        }
+        
+        .footer-left {
+            flex: 1;
+            min-width: 280px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo img {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            border-radius: 0;
+            background: transparent;
+            display: block;
+        }
+        
+        .footer-logo h2 {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+        
+        .footer-tagline {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+        
+        .footer-right {
+            display: flex;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.2s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(4px);
+        }
+        
+        .footer-bottom {
             text-align: center;
-            color: #6b7280;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
         }
 
         /* Kategori Event Section Styles */
@@ -376,11 +454,18 @@
         
         .category-list {
             display: flex;
-            gap: 28px;
+            justify-content: space-between;
             overflow-x: auto;
             padding: 10px 5px 15px 5px;
             scrollbar-width: none; /* Hide scrollbar Firefox */
             -ms-overflow-style: none; /* Hide scrollbar IE */
+        }
+        
+        @media (max-width: 992px) {
+            .category-list {
+                justify-content: flex-start;
+                gap: 24px;
+            }
         }
         
         .category-list::-webkit-scrollbar {
@@ -596,6 +681,48 @@
             </div>
         </div>
 
+        <div class="section-header">
+            <h2>🔥 Rekomendasi</h2>
+            <a href="#">Lihat semua <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="event-grid">
+            @forelse($recommendedEvents as $event)
+            <div class="event-card" data-category="{{ $event->category }}">
+                <img src="{{ $event->image ? asset($event->image) : 'https://picsum.photos/seed/'.$event->id.'/400/300' }}" alt="{{ $event->name }}" class="event-image">
+                <div class="event-content">
+                    <div class="event-header">
+                        <h3>{{ $event->name }}</h3>
+                        <span class="category">{{ $event->category ?? 'Event' }}</span>
+                    </div>
+                    <div class="event-info">
+                        <i class="far fa-calendar-alt"></i>
+                        <span>{{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</span>
+                    </div>
+                    <div class="event-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ $event->location }}</span>
+                    </div>
+                    <div class="event-footer">
+                        <span class="price">Rp {{ number_format($event->price, 0, ',', '.') }}</span>
+                        <a href="{{ route('checkout', $event->id) }}" class="btn-beli inline-block text-center text-sm"><i class="fas fa-ticket-alt"></i> Beli</a>
+                    </div>
+                </div>
+            </div>
+            @empty
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px 0; color: #6b7280;">
+                <i class="fas fa-calendar-times" style="font-size: 48px; margin-bottom: 16px; color: #d1d5db;"></i>
+                <p>Belum ada event rekomendasi saat ini.</p>
+            </div>
+            @endforelse
+            
+            <!-- Empty state for recommended events filter -->
+            <div id="recommended-empty" style="display: none; grid-column: 1 / -1; text-align: center; padding: 40px 0; color: #6b7280;">
+                <i class="fas fa-calendar-times" style="font-size: 48px; margin-bottom: 16px; color: #d1d5db;"></i>
+                <p>Belum ada event rekomendasi di kategori ini.</p>
+            </div>
+        </div>
+
         <!-- Kategori Event Section -->
         <div class="category-container">
             <h2 class="category-title">Kategori Event</h2>
@@ -644,48 +771,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="section-header">
-            <h2>🔥 Rekomendasi</h2>
-            <a href="#">Lihat semua <i class="fas fa-arrow-right"></i></a>
-        </div>
-        
-        <div class="event-grid">
-            @forelse($recommendedEvents as $event)
-            <div class="event-card" data-category="{{ $event->category }}">
-                <img src="{{ $event->image ? asset($event->image) : 'https://picsum.photos/seed/'.$event->id.'/400/300' }}" alt="{{ $event->name }}" class="event-image">
-                <div class="event-content">
-                    <div class="event-header">
-                        <h3>{{ $event->name }}</h3>
-                        <span class="category">{{ $event->category ?? 'Event' }}</span>
-                    </div>
-                    <div class="event-info">
-                        <i class="far fa-calendar-alt"></i>
-                        <span>{{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</span>
-                    </div>
-                    <div class="event-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>{{ $event->location }}</span>
-                    </div>
-                    <div class="event-footer">
-                        <span class="price">Rp {{ number_format($event->price, 0, ',', '.') }}</span>
-                        <a href="{{ route('checkout', $event->id) }}" class="btn-beli inline-block text-center text-sm"><i class="fas fa-ticket-alt"></i> Beli</a>
-                    </div>
-                </div>
-            </div>
-            @empty
-            <div style="grid-column: 1 / -1; text-align: center; padding: 40px 0; color: #6b7280;">
-                <i class="fas fa-calendar-times" style="font-size: 48px; margin-bottom: 16px; color: #d1d5db;"></i>
-                <p>Belum ada event rekomendasi saat ini.</p>
-            </div>
-            @endforelse
-            
-            <!-- Empty state for recommended events filter -->
-            <div id="recommended-empty" style="display: none; grid-column: 1 / -1; text-align: center; padding: 40px 0; color: #6b7280;">
-                <i class="fas fa-calendar-times" style="font-size: 48px; margin-bottom: 16px; color: #d1d5db;"></i>
-                <p>Belum ada event rekomendasi di kategori ini.</p>
-            </div>
-        </div>
         
         <div class="section-header">
             <h2>⭐ Populer Minggu Ini</h2>
@@ -716,8 +801,28 @@
             </div>
         </div>
         
-        <div class="footer">
-            <p>&copy; 2029 Ketix. Temukan event terbaik untukmu!</p>
+        <!-- Footer -->
+        <div class="footer-premium">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <img src="{{ asset('assets/logo2.png') }}" alt="Logo Ketix">
+                        <h2>Ketix</h2>
+                    </div>
+                    <p class="footer-tagline">Your Professional Ticketing Partner</p>
+                </div>
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <a href="#">Tentang Kami</a>
+                        <a href="#">Our Journey</a>
+                        <a href="#">Hubungi Kami</a>
+                        <a href="#">Biaya</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Ketix. All rights reserved.</p>
+            </div>
         </div>
     </div>
     
@@ -765,62 +870,11 @@
             }
         });
 
-        // Category Filter Logic
+        // Category Filter Logic (Homepage redirects to Jelajah)
         document.querySelectorAll('.category-item').forEach(item => {
             item.addEventListener('click', function() {
-                // Remove active class from all categories and add to clicked
-                document.querySelectorAll('.category-item').forEach(cat => cat.classList.remove('active'));
-                this.classList.add('active');
-                
                 const selectedCategory = this.getAttribute('data-filter');
-                
-                // Filter Recommended Events
-                let visibleRecommendedCount = 0;
-                const recCards = document.querySelectorAll('.event-grid .event-card');
-                recCards.forEach(card => {
-                    const cardCategory = card.getAttribute('data-category');
-                    if (selectedCategory === 'semua' || cardCategory === selectedCategory) {
-                        card.style.display = 'block';
-                        card.classList.add('fade-in-up');
-                        visibleRecommendedCount++;
-                    } else {
-                        card.style.display = 'none';
-                        card.classList.remove('fade-in-up');
-                    }
-                });
-                
-                const recEmpty = document.getElementById('recommended-empty');
-                if (recEmpty) {
-                    if (recCards.length > 0 && visibleRecommendedCount === 0) {
-                        recEmpty.style.display = 'block';
-                    } else {
-                        recEmpty.style.display = 'none';
-                    }
-                }
-                
-                // Filter Popular Events
-                let visiblePopularCount = 0;
-                const popCards = document.querySelectorAll('.scroll-container .popular-card');
-                popCards.forEach(card => {
-                    const cardCategory = card.getAttribute('data-category');
-                    if (selectedCategory === 'semua' || cardCategory === selectedCategory) {
-                        card.style.display = 'block';
-                        card.classList.add('fade-in-up');
-                        visiblePopularCount++;
-                    } else {
-                        card.style.display = 'none';
-                        card.classList.remove('fade-in-up');
-                    }
-                });
-                
-                const popEmpty = document.getElementById('popular-empty');
-                if (popEmpty) {
-                    if (popCards.length > 0 && visiblePopularCount === 0) {
-                        popEmpty.style.display = 'block';
-                    } else {
-                        popEmpty.style.display = 'none';
-                    }
-                }
+                window.location.href = '{{ route("jelajah") }}?category=' + encodeURIComponent(selectedCategory);
             });
         });
     </script>
